@@ -1,4 +1,4 @@
-package DataBase.hogwards;
+package DataBase.hogwards.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class HogwardsApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(HogwardsApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(HogwardsApplication.class, args);
+    }
 
 }

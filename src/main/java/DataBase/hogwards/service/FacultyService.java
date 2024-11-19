@@ -23,7 +23,10 @@ public class FacultyService {
         return facultyRepository.findById(facultyId).orElseThrow(() -> new FacultyNotFoundException());
     }
 
-    public Faculty editFaculty(Faculty faculty) {
+    public Faculty editFaculty(Long id, String name, String color) {
+        Faculty faculty = facultyRepository.findById(id).get();
+        faculty.setName(name);
+        faculty.setColor(color);
         return facultyRepository.save(faculty);
     }
 

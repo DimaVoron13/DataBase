@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/faculty")
@@ -28,13 +27,10 @@ public class FacultyController {
         return servFaculty.addFaculty(faculty);
     }
 
-    @PutMapping
-    public ResponseEntity<Faculty> editFaculty(@RequestBody Faculty faculty) {
-        Faculty foundFac = servFaculty.editFaculty(faculty);
-        if (foundFac == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
-        return ResponseEntity.ok(foundFac);
+    @PutMapping("/{id}")
+    public ResponseEntity<Faculty> editFaculty(@PathVariable Long id, @RequestParam String name, @RequestParam String color) {
+        Faculty faculty = servFaculty.editFaculty(id, name, color);
+        return new ResponseEntity<>(faculty, HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")

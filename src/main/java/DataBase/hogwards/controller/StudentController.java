@@ -28,13 +28,9 @@ public class StudentController {
         return servStudent.addStudent(student);
     }
 
-    @PutMapping
-    public ResponseEntity<Student> editStudent(@RequestBody Student student) {
-        Student founded = servStudent.editStudent(student);
-        if (founded == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
-        return ResponseEntity.ok(founded);
+    @PutMapping("/{id}")
+    public ResponseEntity<Student> editStudent(@PathVariable long id, @RequestParam String name, @RequestParam int age) {
+        return new ResponseEntity<>(new Student(), HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")

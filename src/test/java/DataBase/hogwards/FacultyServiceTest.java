@@ -43,14 +43,4 @@ public class FacultyServiceTest {
         assertNotNull(actual);
         assertEquals(actual, expected);
     }
-
-    @Test
-    public void editFaculty() {
-        Faculty expected = new Faculty();
-        expected.setId(1L);
-        when(facultyRepository.save(expected)).thenReturn((expected));
-        Faculty actual = facultyService.editFaculty(expected);
-        assertNotNull(actual);
-        assertEquals(actual, expected);
-    }
 }

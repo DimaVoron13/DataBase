@@ -1,0 +1,49 @@
+package DataBase.hogwards.controller;
+
+import DataBase.hogwards.model.Student;
+import DataBase.hogwards.service.StudentService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
+
+@RestController
+@RequestMapping("/student")
+public class StudentController {
+    public final StudentService servStudent;
+
+    public StudentController(StudentService servStudent) {
+        this.servStudent = servStudent;
+    }
+
+    @GetMapping("{id}")
+    public Student findStudent(@PathVariable Long id) {
+        Student student = servStudent.findStudent(id);
+        return student;
+    }
+
+    @PostMapping
+    public Student addStudent(@RequestBody Student student) {
+        return servStudent.addStudent(student);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Student> editStudent(@PathVariable long id, @RequestParam String name, @RequestParam int age) {
+        return new ResponseEntity<>(new Student(), HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deletestudent(@PathVariable Long id) {
+        servStudent.deleteSudent(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<Collection<Student>> studentsByAge(@RequestParam(required = false) int age) {
+        if (age < 8) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        return ResponseEntity.ok(servStudent.studentsByAge(age));
+    }
+}
